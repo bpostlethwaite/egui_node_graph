@@ -357,7 +357,7 @@ where
     pub const MAX_NODE_SIZE: [f32; 2] = [200.0, 200.0];
 
     pub fn show(
-        self,
+        &mut self,
         ui: &mut Ui,
         user_state: &UserState,
     ) -> Vec<NodeResponse<UserResponse, NodeData>> {
@@ -373,7 +373,7 @@ where
     /// Draws this node. Also fills in the list of port locations with all of its ports.
     /// Returns responses indicating multiple events.
     fn show_graph_node(
-        self,
+        &mut self,
         ui: &mut Ui,
         user_state: &UserState,
     ) -> Vec<NodeResponse<UserResponse, NodeData>> {
@@ -450,10 +450,10 @@ where
                 output_port_heights.push((height_before + height_after) / 2.0);
             }
 
+            let mut node = &mut self.graph[self.node_id];
             responses.extend(
-                self.graph[self.node_id]
-                    .user_data
-                    .bottom_ui(ui, self.node_id, self.graph, user_state)
+                node.user_data
+                    .bottom_ui(ui, self.node_id, user_state)
                     .into_iter(),
             );
         });

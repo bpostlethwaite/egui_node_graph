@@ -67,10 +67,9 @@ where
 
     /// Additional UI elements to draw in the nodes, after the parameters.
     fn bottom_ui(
-        &self,
+        &mut self,
         ui: &mut egui::Ui,
         node_id: NodeId,
-        graph: &Graph<Self, Self::DataType, Self::ValueType>,
         user_state: &Self::UserState,
     ) -> Vec<NodeResponse<Self::Response, Self>>
     where
